@@ -2383,6 +2383,13 @@ public class LibvirtComputingResource extends ServerResourceBase implements Serv
 
         devices.addDevice(new WatchDogDef(_watchDogAction, _watchDogModel));
 
+        if (MapUtils.isNotEmpty(customParams) && customParams.containsKey(VideoDef.VIDEO_MODEL)) {
+            _videoHw = customParams.get(VideoDef.VIDEO_MODEL);
+        }
+        if (MapUtils.isNotEmpty(customParams) && customParams.containsKey(VideoDef.VIDEO_RAM)) {
+            String value = customParams.get(VideoDef.VIDEO_RAM);
+            _videoRam = NumbersUtil.parseInt(value, 0);
+        }
         final VideoDef videoCard = new VideoDef(_videoHw, _videoRam);
         devices.addDevice(videoCard);
 
